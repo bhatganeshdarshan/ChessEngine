@@ -22,7 +22,8 @@ void InitSq120ToSq64()
     {
         for(file=FILE_A;file<=FILE_H;file++)
         {
-            sq=FileRankToSq(file,rank);
+            // sq=FileRankToSq(file,rank);
+            sq=(21+file)+(rank*10);
             Sq64ToSq120[sq64]=sq;
             Sq120ToSq64[sq]=sq64;
             sq64++;

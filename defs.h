@@ -12,9 +12,9 @@ typedef unsigned long long U64;
 
 // #define FileRankToSq(f,r) ((21+f)+(r*10))
 
-extern int FileRankToSq(int f,int r)
+int FileRankToSq(int f,int r)
 {
-    return ((21+f)*(r*10));
+    return ((21+f)+(r*10));
 }
 
 enum {EMPTY,wP,wN,wB,wR,wQ,wK,bP,bN,bB,bR,bQ,bK};
@@ -76,5 +76,9 @@ typedef struct
 
 extern int Sq120ToSq64[BRD_SQ_NUM];
 extern int Sq64ToSq120[64];
+
+//fun
+
+extern void AllInit();
 
 #endif
