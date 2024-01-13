@@ -6,6 +6,16 @@ typedef unsigned long long U64;
 
 #define NAME "Chess Bot 1.0 by Ganeshdarshan"
 #define BRD_SQ_NUM 120
+#define MAX_GAME_MOVES 1024
+
+//Macro 
+
+// #define FileRankToSq(f,r) ((21+f)+(r*10))
+
+extern int FileRankToSq(int f,int r)
+{
+    return ((21+f)*(r*10));
+}
 
 enum {EMPTY,wP,wN,wB,wR,wQ,wK,bP,bN,bB,bR,bQ,bK};
 enum {FILE_A,FILE_B,FILE_C,FILE_D,FILE_E,FILE_F,FILE_G,FILE_H,FILE_NONE};
@@ -24,5 +34,47 @@ enum {
 };
 
 enum {FALSE,TRUE};
+
+enum {wKCa = 1 , wQCa = 2 , bKCa =4 , bQCa = 8};
+
+typedef struct
+{
+    int move;
+    int canCastle;
+    int enPass;
+    int fiftyMove;
+    U64 posKey;  
+}S_UNDO;
+
+
+typedef struct
+{
+    int pieces[BRD_SQ_NUM];
+    U64 pawns[3]; // total 8 bit -> each bit represents whether the pawn is present in particular position or not
+    // if present bit is set to 1 , or else it will be zero 
+    int KingSquare[2];
+    int sideToMove;
+    int enPass;
+    int fiftyMove;
+    int ply;
+    int hisPly;
+
+    U64 posKey;
+    int pcNum[13];
+    int bigPiece[3]; // other pieces except pawns i.e 13-10 = 3
+    int majorPiece[3];
+    int minorPiece[3];
+
+    int canCastle;
+
+    S_UNDO History[MAX_GAME_MOVES];
+    
+}S_BOARD;
+
+
+//global
+
+extern int Sq120ToSq64[BRD_SQ_NUM];
+extern int Sq64ToSq120[64];
 
 #endif
